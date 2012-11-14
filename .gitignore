@@ -4,6 +4,7 @@
 # Libraries
 *.lib
 *.a
+asmladder
 
 # Shared objects (inc. Windows DLLs)
 *.dll
