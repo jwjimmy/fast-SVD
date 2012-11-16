@@ -7,3 +7,7 @@ It should be capable of running CORDIC, an eight tap FIR filter, and calculating
 It should support branch, jump, ALU, and load/store word instructions, being functionally turing complete.
 
 It'll be RISC, Harvard arch, modeled off the attiny.
+
+* FIR gets I16Q16
+* CORDIC gets a unitless I1Q31, gives 16b angles
+* SQRT gives 12b
