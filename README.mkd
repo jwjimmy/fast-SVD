@@ -8,9 +8,9 @@ It should support branch, jump, ALU, and load/store word instructions, being fun
 
 It'll be RISC, Harvard arch, modeled off MIPS.
 
-* FIR gets I16Q16
-* CORDIC gets a unitless I1Q31, gives 16b angles
-* SQRT gives 12b
+* FIR gets I16Q16 and returns I16Q16
+* CORDIC gets a unitless I1Q31, gives 16b angles with 16b precision
+* SQRT gets and gives I12Q20, the result having 12b precision
 
 -----
 
