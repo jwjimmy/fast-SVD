@@ -19,13 +19,14 @@ void cordic(int theta, int *s, int *c, int n)
   n = (n>CORDIC_NTAB) ? CORDIC_NTAB : n;
   for (k=0; k<n; ++k)
   {
-    d = z>>15;
-    //get sign. for other architectures, you might want to use the more portable version
-    //d = z>=0 ? 0 : -1;
+    d = z >> 15;
     tx = x - (((y>>k) ^ d) - d);
     ty = y + (((x>>k) ^ d) - d);
     tz = z - ((cordic_ctab[k] ^ d) - d);
-    x = tx; y = ty; z = tz;
+    x = tx; 
+    y = ty; 
+    z = tz;
   }  
- *c = x; *s = y;
+ *c = x;
+ *s = y;
 }

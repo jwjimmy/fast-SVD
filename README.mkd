@@ -6,8 +6,48 @@ It should be capable of running CORDIC, an eight tap FIR filter, and calculating
 
 It should support branch, jump, ALU, and load/store word instructions, being functionally turing complete.
 
-It'll be RISC, Harvard arch, modeled off the attiny.
+It'll be RISC, Harvard arch, modeled off MIPS.
 
 * FIR gets I16Q16
 * CORDIC gets a unitless I1Q31, gives 16b angles
 * SQRT gives 12b
+
+-----
+
+To calculate an FIR filter, each output data point requires, per tap:
+
+* one 32b word move to advance the data one timestep
+* one 32b multiply of a value times a 32b pre-set constant 
+* one sum result from the 32b multiply with the running total
+
+Additionally, load/store operations may be required to ensure data is available if register space for all constants / values is not available.
+
+This results in somewhere no less than 24 cycles to calculate one output value, and possibly more than 48 cycles if each constant and value are stored in RAM.
+
+-----
+
+To calculate CORDIC, the following calculations are required:
+ 
+* three comparisons to determine the appropriate value with which to normalize the input value to between 0 and pi/2.
+* a maximum of one subtraction where the input theta is subtracted from the previously determined value
+* a maximum of one store of the previously determined offset value to a known memory location or place on the stack
+* one multiply / divide by constant to convert input I1Q31 number (b/t -1 and 1) to a CORDIC-manipulatable integer
+
+for each precision-increasing iteration of the algorithm:
+
+* three right shifts (one to get sign, two to k)
+* six add/subtracts
+* three xors (against d)
+* one 32b fetch from LUT memory (CORDIC constant)
+* increment iteration counter (k)
+
+at the end of iterating:
+
+* one 32b fetch of normalization / offset value
+* one 32b addition of normalization / offset value
+
+This gives a total of eight operations plus fourteen operations per loop iteration.
+
+Trials(see cordic.c and make.sh) indicate that at least ten iterations are required to deliver reasonable results.
+
+This gives a total of 148 operations per calculation of sine and cosine.
