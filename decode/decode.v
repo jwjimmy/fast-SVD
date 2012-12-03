@@ -7,17 +7,28 @@ output reg [15:0] imm
 );
     always @ (memory) begin
         //R type
+        //opcode and funct decide the type of instruction
         opcode = memory[31:26];
+        funct = memory[5:0];
+
         rs = memory[25:21];
         rt = memory[20:16];
         rd = memory[15:11];
         shamt = memory[10:6];
-        funct = memory[5:0];
 
         //I type
         imm = memory[15:0];
 
         //J type
         addr = memory[25:0];
+
+        case (opcode)
+            2'h0:; //R type
+            2'h23:; //I type
+            2'h2B:; //I type
+            2'h4:; //I type
+            2'h2: ; //J type
+            default:; //error
+        endcase
     end
 endmodule
