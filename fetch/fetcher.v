@@ -4,7 +4,7 @@ module fetcher (out, addr);
 
 	input [31:0] addr;
 
-	reg [7:0] data [65535:0];
+	reg [31:0] data [65535:0];
 
 	initial begin
 		$readmemh("progmem.hex", data);
