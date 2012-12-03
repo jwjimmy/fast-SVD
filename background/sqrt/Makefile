@@ -20,6 +20,9 @@ else	#assume Linux/Unix
 	OBJS = sample.o sqrt.o
 endif
 
+objs:	sqrt.c sqrt.h
+	avr-objdump -S $<
+
 all:		sample$(EXE)
 
 sample$(EXE):	$(OBJS)

@@ -5,6 +5,7 @@
 *.lib
 *.a
 asmladder
+background
 
 # Shared objects (inc. Windows DLLs)
 *.dll
