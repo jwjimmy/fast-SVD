@@ -1,0 +1,78 @@
+$date
+	Mon Dec  3 17:39:48 2012
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module decoderTest $end
+$var wire 26 ! Taddr [25:0] $end
+$var wire 6 " Tfunct [5:0] $end
+$var wire 16 # Timm [15:0] $end
+$var wire 6 $ Topcode [5:0] $end
+$var wire 5 % Trd [4:0] $end
+$var wire 5 & Trs [4:0] $end
+$var wire 5 ' Trt [4:0] $end
+$var wire 5 ( Tshamt [4:0] $end
+$var reg 32 ) Tmemory [31:0] $end
+$scope module tester $end
+$var wire 32 * memory [31:0] $end
+$var reg 26 + addr [25:0] $end
+$var reg 6 , funct [5:0] $end
+$var reg 16 - imm [15:0] $end
+$var reg 6 . opcode [5:0] $end
+$var reg 5 / rd [4:0] $end
+$var reg 5 0 rs [4:0] $end
+$var reg 5 1 rt [4:0] $end
+$var reg 5 2 shamt [4:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+b11 -
+b11 ,
+b11 +
+b11 *
+b11 )
+b0 (
+b0 '
+b0 &
+b0 %
+b0 $
+b11 #
+b11 "
+b11 !
+$end
+#2000
+b11 .
+b11 $
+b1100000000000000000000000011 )
+b1100000000000000000000000011 *
+#4000
+b110000 .
+b110000 $
+b11000000000000000000000000000011 )
+b11000000000000000000000000000011 *
+#6000
+b100000 .
+b100000 $
+b10000000000000000000000000000011 )
+b10000000000000000000000000000011 *
+#8000
+b11110000000000000000000011 +
+b11110000000000000000000011 !
+b11110 0
+b11110 &
+b0 .
+b0 $
+b11110000000000000000000011 )
+b11110000000000000000000011 *
+#10000
