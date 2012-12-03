@@ -11,7 +11,7 @@ module fetchTester;
 		#100;
 		addr = 32'b1;
 		#100;
-		addr = 32'b10;
+		addr = 32'b1000;
 		#100;
 	end
 
