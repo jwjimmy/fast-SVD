@@ -1,20 +1,7 @@
 module cpuTest;
-    input clk;
+    reg Tclk;
 
-    reg [31:0] Tregisters [31:0];
-
-    wire [31:0] Tinstruction;
-    reg [31:0] TprogramCounter;
-
-    reg [31:0] Ta, Tb;
-
-    wire [5:0] Topcode, Tfunct;
-    wire [4:0] Trs, Trt, Trd, Tshamt;
-    wire [25:0] Taddr;
-    wire [15:0] Timm;
-    wire [31:0] Tout;
-
-    cpu cpuTester (Tout, addr);
+    cpu cpuTester (Tclk);
 
     initial begin
         $monitorh($time, ,, Tout, ,, addr);

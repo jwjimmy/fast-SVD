@@ -5,7 +5,7 @@ module cpu (clk)
 	reg [31:0] registers [31:0];
 
 	// instantiate four kilowords of RAM, avoid using 8b words to save program counter / stack logic overhead
-	reg [31:0] ram [4095:0]; 
+	reg [31:0] ram [4095:0];
 
 	// instantiate wire for 32b instruction bus
 	wire [31:0] instruction;
@@ -27,10 +27,10 @@ module cpu (clk)
 
 	decoder decode (instruction, opcode, funct, rs, rt, rd, shamt, addr, imm);
 
-	alu mather (out, a, b, shamt, funct);  
+	alu mather (out, a, b, shamt, funct);
 
 	initial begin
-		
+
 	always @ (posedge clk) begin
 
 		case (opcode)
@@ -44,7 +44,7 @@ module cpu (clk)
 				end;
 			// I type
 			// load word from RAM address $(rs + imm) to register 'rt'
-            2'h23: 
+            2'h23:
 				begin
 					registers[rt] = ram[rs + imm];
 				end
@@ -69,5 +69,5 @@ module cpu (clk)
 				begin
 					programCounter = imm;
 				end
-        endcase 
-endmodule 
+        endcase
+endmodule
