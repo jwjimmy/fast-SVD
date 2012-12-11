@@ -10,9 +10,6 @@ module decoderTest;
 
     initial
     begin
-		clk = 1;
-		clk = 0;
-		
         $monitor($time, , Tmemory, , Topcode, , Tfunct, , Taddr);
 //        $dumpfile("test.vcd");
 //        $dumpvars(0,decoderTest);
@@ -29,9 +26,12 @@ module decoderTest;
         #2000;
     end
 
-	always @ (negedge clk)
+	initial
 	begin
-		#1 clk = ~clk;
+		clk = 0;
+		repeat (100000) begin
+			#1 clk = ~clk;
+		end
 	end
 
     decoder tester
