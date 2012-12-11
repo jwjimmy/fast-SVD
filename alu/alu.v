@@ -1,8 +1,10 @@
-module alu (out, a, b, shamt, funct);
+module alu (clk, out, a, b, shamt, funct);
 
 	// crappy ALU mk 1.0
 	// could be thrice as long and twenty times as fast, but it's simply not worth it
 	// note that 'a' = $s; 'b' = $v; 'out' = $d;
+
+	input clk;
 
 	output reg [31:0] out;
 
@@ -14,7 +16,8 @@ module alu (out, a, b, shamt, funct);
 
 	input [4:0] shamt;
 
-	always @ (a,b, shamt, funct) begin
+
+	always @ (negedge clk) begin
 
 		case (funct) 
 			6'h00: out = a << shamt; // lshift
