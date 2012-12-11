@@ -1,4 +1,0 @@
-WARNING: fetcher.v:10: $readmemh: Standard inconsistency, following 1364-2005.
-                   0  00000000  00000000
-                 100  00000001  00000001
-                 200  00000002  00000002
