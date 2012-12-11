@@ -1,4 +1,6 @@
-module fetcher (out, addr);
+module fetcher (clk, out, addr);
+
+	input clk;
 
 	output reg [31:0] out;
 
@@ -10,7 +12,7 @@ module fetcher (out, addr);
 		$readmemh("progmem.hex", data);
 	end
 
-	always @ (addr) begin
+	always @ (negedge clk) begin
 		out = data[addr];
 	end
 
