@@ -9,8 +9,6 @@ module aluTester;
 	alu aluTester (clk, out, a, b, shamt, funct);
 
 	initial begin
-		clk = 1;
-		clk = 0;
 		$display("		$time,	out,	a,	  b,	 shamt,	 funct");
 		$monitorh($time, ,, out, ,, a, ,, b, ,, shamt, ,, funct);
 		a = 32'h1000;
@@ -22,9 +20,11 @@ module aluTester;
 		#100;
 	end
 
-	always @ ( negedge clk)
-	begin
+	initial begin
+		clk = 0;
+		repeat (10000) begin
 		#1 clk = ~clk;
+		end
 	end
 
 endmodule
