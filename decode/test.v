@@ -6,11 +6,16 @@ module decoderTest;
     wire[25:0] Taddr;
     wire[15:0] Timm;
 
+	reg clk;
+
     initial
     begin
+		clk = 1;
+		clk = 0;
+		
         $monitor($time, , Tmemory, , Topcode, , Tfunct, , Taddr);
-        $dumpfile("test.vcd");
-        $dumpvars(0,decoderTest);
+//        $dumpfile("test.vcd");
+//        $dumpvars(0,decoderTest);
 
         Tmemory = 32'b00000000000000000000000000000011;
         #2000;
@@ -24,8 +29,14 @@ module decoderTest;
         #2000;
     end
 
+	always @ (negedge clk)
+	begin
+		#1 clk = ~clk;
+	end
+
     decoder tester
-        (Tmemory,
+        (clk,
+		Tmemory,
         Topcode,
         Tfunct,
         Trs,

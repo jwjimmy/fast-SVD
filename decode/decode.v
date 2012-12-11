@@ -1,11 +1,12 @@
 module decoder (
+input clk,
 input [31:0] memory,
 output reg [5:0] opcode, funct,
 output reg [4:0] rs, rt, rd, shamt,
 output reg [25:0] addr,
 output reg [15:0] imm
 );
-    always @ (memory) begin
+    always @ (negedge clk) begin
         //R type
         //opcode and funct decide the type of instruction
         opcode = memory[31:26];
@@ -22,13 +23,5 @@ output reg [15:0] imm
         //J type
         addr = memory[25:0];
 
-        case (opcode)
-            2'h0:; //R type
-            2'h23:; //I type
-            2'h2B:; //I type
-            2'h4:; //I type
-            2'h2: ; //J type
-            default:; //error
-        endcase
     end
 endmodule
