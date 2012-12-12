@@ -23,11 +23,11 @@ module cpu (clk,a,b,out);
 	wire [15:0] imm;
 	wire [31:0] out;
 
-	fetcher fetch (clk, instruction, programCounter);
+	fetcher fetch (instruction, programCounter);
 
-	decoder decode (clk, instruction, opcode, funct, rs, rt, rd, shamt, addr, imm);
+	decoder decode (instruction, opcode, funct, rs, rt, rd, shamt, addr, imm);
 
-	alu mather (clk, out, a, b, shamt, funct);
+	alu mather (out, a, b, shamt, funct);
 
 	initial begin/*
 		registers[0] = 2'h1;
