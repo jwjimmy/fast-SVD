@@ -8,9 +8,9 @@ module fetcher (clk, out, addr);
 
 	reg [31:0] data [65535:0];
 
-	initial begin
+	initial //begin
 		$readmemh("progmem.hex", data);
-	end
+	//end
 
 	always @ (negedge clk) begin
 		out = data[addr];
