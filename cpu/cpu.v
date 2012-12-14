@@ -1,4 +1,4 @@
-module cpu (clk,a,b,Cout);
+module cpu (clk);
 	input clk;
 
 	// instantiate thirty two single-word registers
@@ -30,12 +30,13 @@ module cpu (clk,a,b,Cout);
 
 	alu mather (clk, out, a, b, shamt, funct);
 
-	//$monitor(clk, ,a, ,b, ,out);
-
 	initial begin
 
 	registers[0] = 2'h1;
 	registers[1] = 2'h2;
+    programCounter = 0;
+
+    $monitor(clk, ,a, ,b, ,out);
 
 	end
 
@@ -51,6 +52,8 @@ module cpu (clk,a,b,Cout);
                     //Cout = registers[rd];
 					registers[rd] = out;
 					Cout = out;
+
+        			programCounter = programCounter + 1;
 				end
 			// I type
 			// load word from RAM address $(rs + imm) to register 'rt'

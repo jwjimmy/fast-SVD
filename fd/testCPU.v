@@ -35,6 +35,7 @@ module testCPU;
         registers[0] = 2'h1;
         registers[1] = 2'h2;
         clk = 0;
+        programCounter = 0;
         repeat(10)
         begin
             #1 clk = ~clk;
