@@ -16,7 +16,6 @@ module cpu (clk);
 	// instantiate registers for ALU inputs
 	output reg [31:0] a, b;
 	wire [31:0] out;
-	output reg [31:0] Cout;
 
 	// connect decoder output to ALU inputs and register indexes
 	wire [5:0] opcode, funct;
@@ -32,11 +31,11 @@ module cpu (clk);
 
 	initial begin
 
-	registers[0] = 2'h1;
-	registers[1] = 2'h2;
+	registers[0] = 8'h001;
+	registers[1] = 8'h002;
     programCounter = 0;
 
-    $monitor(clk, ,a, ,b, ,out);
+    $monitorh($time, ,clk, ,programCounter, ,instruction, ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
 
 	end
 
@@ -51,9 +50,8 @@ module cpu (clk);
 					b = registers[rt];
                     //Cout = registers[rd];
 					registers[rd] = out;
-					Cout = out;
-
         			programCounter = programCounter + 1;
+
 				end
 			// I type
 			// load word from RAM address $(rs + imm) to register 'rt'
