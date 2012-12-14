@@ -24,6 +24,8 @@ module decoderTest;
         #2000;
         Tmemory = 32'b00000011110000000000000000000011;
         #2000;
+        Tmemory = 32'h00011020;
+        #2000;
     end
 
 	initial
@@ -34,7 +36,7 @@ module decoderTest;
 		end
 	end
 
-    decoder tester
+    decode tester
         (clk,
 		Tmemory,
         Topcode,
