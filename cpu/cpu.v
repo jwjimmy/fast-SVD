@@ -31,11 +31,11 @@ module cpu (clk);
 
 	initial begin
 
-	registers[0] = 8'h001;
-	registers[1] = 8'h002;
+	registers[0] = 9'h001;
+	registers[1] = 9'h002;
     programCounter = 0;
 
-    $monitorh($time, ,clk, ,programCounter, ,instruction, ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
+    $monitorh($time, ,clk, ,programCounter, ,instruction, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
 
 	end
 
@@ -53,19 +53,28 @@ module cpu (clk);
         			programCounter = programCounter + 1;
 
 				end
-			// I type
+			// I type: li
+			// load 16-bit immediate value into register 'rd'
+			6'hF:
+				begin
+					registers[rd] = imm;
+        			programCounter = programCounter + 1;
+				end
+			// I type: lw
 			// load word from RAM address $(rs + imm) to register 'rt'
             6'h23:
 				begin
 					registers[rt] = ram[rs + imm];
+        			programCounter = programCounter + 1;
 				end
-			// I type
+			// I type: sw
 			// store word from register 'rt' to RAM address $(rs + imm)
             6'h2B:
 				begin
 					ram[rs+imm] = registers[rt];
+        			programCounter = programCounter + 1;
 				end
-			// I type
+			// I type: beq
 			// conditional branch if registers 'rs' and 'rt' contain the same value
             6'h4:
 				begin
@@ -74,6 +83,7 @@ module cpu (clk);
 						programCounter = imm;
 					end
 				end
+
 			// J type
 			// unconditional jump to 'imm'
             6'h2:
