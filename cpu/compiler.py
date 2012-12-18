@@ -46,7 +46,7 @@ for line in reader:
             rd = str(rdbin)[2:].zfill(5)
             immbin = bin(int(words[2][0:]))
             imm = str(immbin)[2:].zfill(16)
-            instrbin = "001111" + "00000" + rd + imm
+            instrbin = "001111" + rd + "00000" + imm
         elif words[0] == "sw":
             rsbin = bin(int(words[1][1:]))
             rs = str(rsbin)[2:].zfill(5)

@@ -40,6 +40,7 @@ module cpu (clk);
 	end
 
 	always @ (posedge clk) begin
+	//always @ (negedge clk) begin
 
 		case (opcode)
 			// R type
@@ -57,7 +58,8 @@ module cpu (clk);
 			// load 16-bit immediate value into register 'rd'
 			6'hF:
 				begin
-					registers[rd] = imm;
+					registers[rs] = imm;
+					//$display(imm);
         			programCounter = programCounter + 1;
 				end
 			// I type: lw

@@ -14,6 +14,7 @@ module fetcher (clk, out, addr);
 	//end
 
 	always @ (negedge clk) begin
+	//always @ (posedge clk) begin
 		out = data[addr];
 	end
 

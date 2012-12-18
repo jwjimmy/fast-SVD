@@ -17,7 +17,8 @@ module alu (clk, out, a, b, shamt, funct);
 	input [4:0] shamt;
 
 
-	always @ (negedge clk) begin
+	//always @ (negedge clk) begin
+	always @ (a or b or shamt or funct) begin
 
 		case (funct) 
 			6'h00: out = a << shamt; // lshift

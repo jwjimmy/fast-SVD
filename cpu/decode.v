@@ -6,7 +6,8 @@ output reg [4:0] rs, rt, rd, shamt,
 output reg [25:0] addr,
 output reg [15:0] imm
 );
-    always @ (negedge clk) begin
+    always @ (memory) begin
+    //always @ (*) begin
         //R type
         //opcode and funct decide the type of instruction
         opcode = memory[31:26];
