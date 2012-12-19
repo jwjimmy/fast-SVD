@@ -1,5 +1,5 @@
-module cpu (clk);
-	input clk;
+module alucpu;
+	reg clk;
 
 	// instantiate thirty two single-word registers
 	reg [31:0] registers [31:0];
@@ -19,14 +19,10 @@ module cpu (clk);
 	reg ALUen;
 
 	// connect decoder output to ALU inputs and register indexes
-	wire [5:0] opcode, funct;
-	wire [4:0] rs, rt, rd, shamt;
+	reg [5:0] opcode, funct;
+	reg [4:0] rs, rt, rd, shamt;
 	wire [25:0] addr;
 	wire [15:0] imm;
-
-	fetcher fetch (clk, instruction, programCounter);
-
-	decode decode (clk, instruction, opcode, funct, rs, rt, rd, shamt, addr, imm);
 
 	alu mather (clk, out, a, b, shamt, funct, ALUen);
 	//alu mather (clk, registers[rd], registers[rs], registers[rt], shamt, funct);
@@ -37,17 +33,33 @@ module cpu (clk);
 	registers[1] = 9'h002;
     programCounter = 0;
 	ALUen = 0;
+	opcode = 6'h0;
 
-	$display("\t\t $t clk PC\t instr\t  r[0]\t  r[1]\t   r[2]\t    r[3]\trs rt rd");
-    $monitorh($time, ,clk, ,programCounter, ,instruction, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
-
-	end
-
+    $display("\t\t $t clk PC\t r[0]\t  r[1]\t   r[2]\t    r[3]\trs rt rd");
+    $monitorh($time, ,clk, ,programCounter, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
+	clk = 0;#100
 
 
-	always @ (out) begin
-		registers[rd] = out;
-		//$display("Assign updating a and b: out = %h, a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
+    clk = 1;
+    rs = 6'h1;
+    rt = 6'h0;
+    rd = 6'h2;
+    #100
+
+    clk = 0; rs = 6'h1; rt = 6'h0; rd = 6'h2; // this tells the program to add together two numbers - one in r1, one in r0, and put the result in r2
+    #100
+    clk = 1; rs = 6'h1; rt = 6'h2; rd = 6'h3;
+    #100
+
+    clk = 0; rs = 6'h1; rt = 6'h2; rd = 6'h3;
+    #100
+
+    clk = 1; rs = 6'h1; rt = 6'h0; rd = 6'h2;
+    #100
+    clk = 0; rs = 6'h2; rt = 6'h1; rd = 6'h3;
+    #100
+    clk = 1;
+
 	end
 
 	//always @ (posedge clk) begin
@@ -58,13 +70,16 @@ module cpu (clk);
 			// ALU calls implicit
 			6'h0:
 				begin
-					//$display("Before updating a and b: out = %h, a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
+					$display("Before updating a and b: out = %h. a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
 					a = registers[rs];
 					b = registers[rt];
 					ALUen = 1;
-					//$display("After  updating a and b: out = %h, a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
+					$display("After  updating a and b: out = %h. a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
+                    //Cout = registers[rd];
+
+					registers[rd] = out;
 					ALUen = 0;
-					programCounter = programCounter + 1;
+        			programCounter = programCounter + 1;
 
 				end
 			// I type: li

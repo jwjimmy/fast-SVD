@@ -13,8 +13,8 @@ module fetcher (clk, out, addr);
 		$readmemh("test.hex", data);
 	//end
 
-	always @ (negedge clk) begin
-	//always @ (posedge clk) begin
+	//always @ (negedge clk) begin
+	always @ (posedge clk) begin
 		out = data[addr];
 	end
 

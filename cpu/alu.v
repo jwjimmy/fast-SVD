@@ -1,4 +1,4 @@
-module alu (clk, out, a, b, shamt, funct);
+module alu (clk, out, a, b, shamt, funct, go);
 
 	// crappy ALU mk 1.0
 	// could be thrice as long and twenty times as fast, but it's simply not worth it
@@ -16,11 +16,14 @@ module alu (clk, out, a, b, shamt, funct);
 
 	input [4:0] shamt;
 
+	input go;
+
 
 	//always @ (negedge clk) begin
-	always @ (a or b or shamt or funct) begin
+	//always @ (b or posedge clk) begin
+	always @ (posedge go) begin
 
-		case (funct) 
+		case (funct)
 			6'h00: out = a << shamt; // lshift
 			6'h02: out = a >> shamt; // rshift
 			// 6'h3: out = a >>> shamt; // arithmatic right shift
