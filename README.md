@@ -25,8 +25,10 @@ We use shell scripting to test modules, covered in the next section.
 All components relevant to the SVD processor are in the directory labeled cpu.
 
 Here is a typical workflow, assuming we have a Verilog module called module.v:
+```
 vim module.v #edit the module with whatever changes you are looking for
 ./test.sh #use shell scripting to compile module.v and run the resulting binary
+```
 
 Sample output of test.sh,
 assuming that it is running a CPU being told to load some numbers into registers r[0] to r[2],
