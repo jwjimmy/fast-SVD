@@ -40,8 +40,9 @@ for line in reader:
             print "000000"
         elif words[0] == "sllv":
             shamtbin = bin(int(words[3]))
-            shamt = str(rdbin)[2:].zfill(5)
-            instrbin = "000000" + rd + rs + "00000" + shamt + "000000"
+            shamt = str(shamtbin)[2:].zfill(5)
+            #print shamt + " dsfijodsjfoi " + words[3] + " fd " + shamtbin
+            instrbin = "000000" + rs + "00000" + rd + shamt + "000000"
         elif words[0] == "beq":
             print "000000"
         elif words[0] == "j":

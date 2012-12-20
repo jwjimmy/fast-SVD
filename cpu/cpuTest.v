@@ -7,7 +7,7 @@ module cpuTest;
     initial begin
         Tclk = 0;
 
-        repeat(20)
+        repeat(30)
         begin
             #100 Tclk = ~Tclk;
         end

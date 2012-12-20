@@ -58,7 +58,6 @@ module cpu (clk);
 					ALUen = 1;
 					ALUen = 0;
 					programCounter = programCounter + 1;
-
 				end
 			// I type: li
 			// load 16-bit immediate value into register 'rd'
