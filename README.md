@@ -3,6 +3,7 @@
 -----
 
 The current goal is to have a CPU that computes the SVD of any 2x2 matrix.
+
 The ultimate goal is to have a CPU and a grid of systolic arrays
 that computes the SVD of any matrix that we can adapt the architecture to support, in `nlog(n)` time!.
 
