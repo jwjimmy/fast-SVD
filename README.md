@@ -2,6 +2,12 @@
 
 -----
 
+The current goal is to have a CPU that computes the SVD of any 2x2 matrix.
+The ultimate goal is to have a CPU and a grid of systolic arrays
+that computes the SVD of any matrix that we can adapt the architecture to support, in `nlog(n)` time!.
+
+-----
+
 #Setting Up
 
 This CPU was developed in Icarus Verilog on an Ubuntu machine.
@@ -26,8 +32,8 @@ All components relevant to the SVD processor are in the directory labeled cpu.
 
 Here is a typical workflow, assuming we have a Verilog module called module.v:
 ```
-vim module.v #edit the module with whatever changes you are looking for
-./test.sh #use shell scripting to compile module.v and run the resulting binary
+vim module.v          #edit the module with whatever changes you are looking for
+./test.sh             #use shell scripting to compile module.v and run the resulting binary
 ```
 
 Sample output of test.sh,
@@ -63,6 +69,8 @@ the line number of the next instruction from test.hex to grab.
 
 Now we'll talk about how the CPU uses this stuff.
 
+-----
+
 #CPU
 
  Note that the test bench (cpuTest.v) has only one function:
@@ -80,8 +88,6 @@ Now we'll talk about how the CPU uses this stuff.
 
 It runs like clockwork!
 
-If you would like to edit the assembly
-
 -----
 
 #Description
@@ -90,10 +96,9 @@ An processor with an assembly math library. Designed to compute singular value d
 Includes a compiler for assembly input (compiler.py) and a decompiler (decipher.py) to decompose binary machine
 instructions into recognizable MIPS assembly parameters (e.g. opcode, shamt, funct).
 
-It will support branch, jump, ALU, and load/store word instructions.
+It supports branch, jump, ALU, and load/store word instructions.
+It'll be RISC, Harvard architecture. Library is modeled off MIPS assembly.
 CORDIC gets a unitless I1Q31, gives 16b angles with 16b precision.
-
-It'll be RISC, Harvard architecture, modeled off MIPS assembly.
 
 -----
 
