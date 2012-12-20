@@ -11,6 +11,7 @@ It'll be RISC, Harvard architecture, modeled off MIPS assembly.
 
 -----
 Current structure of the repo
+
 All components relevant to the SVD processor are in the directory labeled cpu.
 
 -----
@@ -18,10 +19,14 @@ All components relevant to the SVD processor are in the directory labeled cpu.
 Setting Up
 
 This CPU was developed in Icarus Verilog on an Ubuntu machine.
+
 Icarus Verilog's installation guide can be found here:
+
 http://iverilog.wikia.com/wiki/Installation_Guide
 
+
 Icarus Verilog has two main executables:
+
 1. iverilog - compiles .v modules into .vvp binaries
 2. vvp - executes .vvp binaries and produces outputs from the simulated hardware
 
