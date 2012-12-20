@@ -72,7 +72,6 @@ module cpu (clk);
 			6'hF:
 				begin
 					registers[rs] = imm;
-					//$display(imm);
         			programCounter = programCounter + 1;
 				end
 			// I type: lw
@@ -86,6 +85,7 @@ module cpu (clk);
 			// store word from register 'rt' to RAM address $(rs + imm)
             6'h2B:
 				begin
+					$display("ifdshoidsfjiodsjfoisdjfoidsjfoisdjfiods");
 					ram[rs+imm] = registers[rt];
         			programCounter = programCounter + 1;
 				end

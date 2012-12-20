@@ -1,7 +1,6 @@
 import fileinput
 import sys
 import re
-#from cStringIO import StringIO
 
 filename = str(sys.argv[1])
 #print filename
@@ -13,17 +12,23 @@ for line in reader:
     if numwords == 4: #three-param instructions are R type
         rsbin = bin(int(words[2][1:]))
         rs = str(rsbin)[2:].zfill(5)
-        rtbin = bin(int(words[3][1:]))
-        rt = str(rtbin)[2:].zfill(5)
         rdbin = bin(int(words[1][1:]))
         rd = str(rdbin)[2:].zfill(5)
         if words[0] == "add":
+            rtbin = bin(int(words[3][1:]))
+            rt = str(rtbin)[2:].zfill(5)
             instrbin = "000000" + rs + rt + rd + "00000" + "100000"
         elif words[0] == "sub":
+            rtbin = bin(int(words[3][1:]))
+            rt = str(rtbin)[2:].zfill(5)
             instrbin = "000000" + rs + rt + rd + "00000" + "100010"
         elif words[0] == "mul":
+            rtbin = bin(int(words[3][1:]))
+            rt = str(rtbin)[2:].zfill(5)
             instrbin = "000000" + rs + rt + rd + "00000" + "011000"
         elif words[0] == "div":
+            rtbin = bin(int(words[3][1:]))
+            rt = str(rtbin)[2:].zfill(5)
             instrbin = "000000" + rs + rt + rd + "00000" + "011010"
         elif words[0] == "and":
             funct = bin(int('20',16))
@@ -34,7 +39,9 @@ for line in reader:
         elif words[0] == "slt":
             print "000000"
         elif words[0] == "sllv":
-            print "000000"
+            shamtbin = bin(int(words[3]))
+            shamt = str(rdbin)[2:].zfill(5)
+            instrbin = "000000" + rd + rs + "00000" + shamt + "000000"
         elif words[0] == "beq":
             print "000000"
         elif words[0] == "j":
@@ -58,6 +65,7 @@ for line in reader:
             int_parencl = complicated.find(')')
             secon_part = bin(int(complicated[ind_paren+1+1:len(complicated)-1],2))[2:].zfill(16)
             instrbin = "101011" + first_part + rs + secon_part
+            #print instrbin
         print hex(int(instrbin,2))[2:].zfill(8) # this is the print statement
     count = count + 1
 
