@@ -26,7 +26,7 @@ module alu (clk, out, a, b, shamt, funct, go);
 		case (funct)
 			6'h00: out = a << shamt; // lshift
 			6'h02: out = a >> shamt; // rshift
-			// 6'h3: out = a >>> shamt; // arithmatic right shift
+			6'h03: out = a >>> shamt; // arithmetic right shift
 			6'h10: out = hi; // move from high
 			6'h12: out = lo; // move from low
 			6'h18: {hi, lo} = a * b; // mul
