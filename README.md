@@ -9,8 +9,8 @@ Icarus Verilog's installation guide can be found here:
 http://iverilog.wikia.com/wiki/Installation_Guide
 
 Icarus Verilog has two main executables:
-1. iverilog - compiles .v modules into .vvp binaries
-2. vvp - executes .vvp binaries and produces outputs from the simulated hardware
+* iverilog - compiles .v modules into .vvp binaries
+* vvp - executes .vvp binaries and produces outputs from the simulated hardware
 
 If you care about waveform outputs then you can use GTKWave to generate waveforms from vvp's monitor data.
 http://gtkwave.sourceforge.net/
@@ -75,9 +75,10 @@ Now we'll talk about how the CPU uses this stuff.
 * alu.v is set to compute inputs and outputs in place as soon as the data (a, b, out) are prepared
 * cpu.v is then set to update the registers based on the alu as soon as the alu is finished.
 
- It runs like clockwork!
 
- If you would like to edit the assembly
+It runs like clockwork!
+
+If you would like to edit the assembly
 
 -----
 
