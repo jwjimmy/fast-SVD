@@ -1,5 +1,67 @@
 # fast-SVD
 
+-----
+
+#Setting Up
+
+This CPU was developed in Icarus Verilog on an Ubuntu machine.
+Icarus Verilog's installation guide can be found here:
+http://iverilog.wikia.com/wiki/Installation_Guide
+
+Icarus Verilog has two main executables:
+iverilog - compiles .v modules into .vvp binaries
+vvp - executes .vvp binaries and produces outputs from the simulated hardware
+
+If you care about waveform outputs then you can use GTKWave to generate waveforms from vvp's monitor data.
+http://gtkwave.sourceforge.net/
+Personally I just looked at the printouts as I needed.
+
+We use shell scripting to test modules, covered in the next section.
+
+-----
+
+#Workflow
+
+All components relevant to the SVD processor are in the directory labeled cpu.
+
+Here is a typical workflow, assuming we have a Verilog module called module.v:
+vim module.v #edit the module with whatever changes you are looking for
+./test.sh #use shell scripting to compile module.v and run the resulting binary
+
+Sample output of test.sh,
+assuming that it is running an CPU being told to load some numbers into registers r[0] to r[3]:
+WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
+ $t clk PC		instr	  r[0]	  r[1]	   r[2]	    r[3]	   rs rt rd
+   0 0 00000000 xxxxxxxx  00000001 00000002 xxxxxxxx xxxxxxxx  xx xx xx
+ 100 1 00000000 3c000005  00000001 00000002 xxxxxxxx xxxxxxxx  00 00 00
+ 200 0 00000001 3c000005  00000005 00000002 xxxxxxxx xxxxxxxx  00 00 00
+ 300 1 00000001 3c200006  00000005 00000002 xxxxxxxx xxxxxxxx  01 00 00
+ 400 0 00000002 3c200006  00000005 00000006 xxxxxxxx xxxxxxxx  01 00 00
+ 500 1 00000002 3c400006  00000005 00000006 xxxxxxxx xxxxxxxx  02 00 00
+ 600 0 00000003 3c400006  00000005 00000006 00000006 xxxxxxxx  02 00 00
+
+#CPU
+
+ Note that the test bench (cpuTest.v) has only one function:
+ initialize a cpu.v module and an external clock, and make the clock go up and down a bunch of times.
+
+ cpu.v is dependent on the following modules:
+ fetcher.v, decode.v, and alu.v
+
+ fetcher.v is set to grab the next instruction from program memory at every positive clock edge.
+ decode.v is set to decode the instruction as soon as fetcher.v is done fetching.
+ cpu.v is set to prepare the input data for the alu every negative clock edge (after decode.v is finished)
+ alu.v is set to compute inputs and outputs in place as soon as the data (a, b, out) are prepared
+ cpu.v is then set to update the registers based on the alu as soon as the alu is finished.
+
+ It runs like clockwork!
+
+ If you would like to edit the assembly
+
+-----
+
+#Description
+
 An processor with an assembly math library. Designed to compute singular value decompositions via CORDIC operations.
 Includes a compiler for assembly input (compiler.py) and a decompiler (decipher.py) to decompose binary machine
 instructions into recognizable MIPS assembly parameters (e.g. opcode, shamt, funct).
@@ -8,29 +70,6 @@ It will support branch, jump, ALU, and load/store word instructions.
 CORDIC gets a unitless I1Q31, gives 16b angles with 16b precision.
 
 It'll be RISC, Harvard architecture, modeled off MIPS assembly.
-
------
-Current structure of the repo
-
-All components relevant to the SVD processor are in the directory labeled cpu.
-
------
-
-Setting Up
-
-This CPU was developed in Icarus Verilog on an Ubuntu machine.
-
-Icarus Verilog's installation guide can be found here:
-
-http://iverilog.wikia.com/wiki/Installation_Guide
-
-
-Icarus Verilog has two main executables:
-
-1. iverilog - compiles .v modules into .vvp binaries
-2. vvp - executes .vvp binaries and produces outputs from the simulated hardware
-
-
 
 -----
 
