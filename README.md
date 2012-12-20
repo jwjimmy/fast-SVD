@@ -30,7 +30,7 @@ vim module.v #edit the module with whatever changes you are looking for
 
 Sample output of test.sh,
 assuming that it is running an CPU being told to load some numbers into registers r[0] to r[3]:
-'''
+```
 WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
  $t clk PC		instr	  r[0]	  r[1]	   r[2]	    r[3]	   rs rt rd
    0 0 00000000 xxxxxxxx  00000001 00000002 xxxxxxxx xxxxxxxx  xx xx xx
@@ -40,7 +40,7 @@ WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
  400 0 00000002 3c200006  00000005 00000006 xxxxxxxx xxxxxxxx  01 00 00
  500 1 00000002 3c400006  00000005 00000006 xxxxxxxx xxxxxxxx  02 00 00
  600 0 00000003 3c400006  00000005 00000006 00000006 xxxxxxxx  02 00 00
-'''
+```
 
 #CPU
 
