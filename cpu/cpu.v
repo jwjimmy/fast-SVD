@@ -29,12 +29,9 @@ module cpu (clk);
 	decode decode (clk, instruction, opcode, funct, rs, rt, rd, shamt, addr, imm);
 
 	alu mather (clk, out, a, b, shamt, funct, ALUen);
-	//alu mather (clk, registers[rd], registers[rs], registers[rt], shamt, funct);
 
 	initial begin
 
-	registers[0] = 9'h001;
-	registers[1] = 9'h002;
     programCounter = 0;
 	ALUen = 0;
 
@@ -47,10 +44,8 @@ module cpu (clk);
 
 	always @ (out) begin
 		registers[rd] = out;
-		//$display("Assign updating a and b: out = %h, a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
 	end
 
-	//always @ (posedge clk) begin
 	always @ (negedge clk) begin
 
 		case (opcode)
@@ -58,11 +53,9 @@ module cpu (clk);
 			// ALU calls implicit
 			6'h0:
 				begin
-					//$display("Before updating a and b: out = %h, a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
 					a = registers[rs];
 					b = registers[rt];
 					ALUen = 1;
-					//$display("After  updating a and b: out = %h, a = %h, b = %h, rs = %h, rt = %h, rd = %h, ALUen = %h",out,a,b,rs,rt,rd,ALUen);
 					ALUen = 0;
 					programCounter = programCounter + 1;
 

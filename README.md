@@ -9,8 +9,8 @@ Icarus Verilog's installation guide can be found here:
 http://iverilog.wikia.com/wiki/Installation_Guide
 
 Icarus Verilog has two main executables:
-iverilog - compiles .v modules into .vvp binaries
-vvp - executes .vvp binaries and produces outputs from the simulated hardware
+1. iverilog - compiles .v modules into .vvp binaries
+2. vvp - executes .vvp binaries and produces outputs from the simulated hardware
 
 If you care about waveform outputs then you can use GTKWave to generate waveforms from vvp's monitor data.
 http://gtkwave.sourceforge.net/
