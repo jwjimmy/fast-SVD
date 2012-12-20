@@ -69,11 +69,11 @@ Now we'll talk about how the CPU uses this stuff.
  cpu.v is dependent on the following modules:
  fetcher.v, decode.v, and alu.v
 
--fetcher.v is set to grab the next instruction from program memory at every positive clock edge.
--decode.v is set to decode the instruction as soon as fetcher.v is done fetching.
--cpu.v is set to prepare the input data for the alu every negative clock edge (after decode.v is finished)
--alu.v is set to compute inputs and outputs in place as soon as the data (a, b, out) are prepared
--cpu.v is then set to update the registers based on the alu as soon as the alu is finished.
+* fetcher.v is set to grab the next instruction from program memory at every positive clock edge.
+* decode.v is set to decode the instruction as soon as fetcher.v is done fetching.
+* cpu.v is set to prepare the input data for the alu every negative clock edge (after decode.v is finished)
+* alu.v is set to compute inputs and outputs in place as soon as the data (a, b, out) are prepared
+* cpu.v is then set to update the registers based on the alu as soon as the alu is finished.
 
  It runs like clockwork!
 
