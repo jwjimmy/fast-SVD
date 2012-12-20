@@ -29,7 +29,8 @@ vim module.v #edit the module with whatever changes you are looking for
 ./test.sh #use shell scripting to compile module.v and run the resulting binary
 
 Sample output of test.sh,
-assuming that it is running an CPU being told to load some numbers into registers r[0] to r[3]:
+assuming that it is running an CPU being told to load some numbers into registers r[0] to r[2],
+while r[0] and r[1] are initialized to have values 00000001 and 00000002 at the beginning:
 ```
 WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
  $t clk PC		instr	  r[0]	  r[1]	   r[2]	    r[3]	   rs rt rd
