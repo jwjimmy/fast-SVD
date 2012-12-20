@@ -29,7 +29,7 @@ vim module.v #edit the module with whatever changes you are looking for
 ./test.sh #use shell scripting to compile module.v and run the resulting binary
 
 Sample output of test.sh,
-assuming that it is running an CPU being told to load some numbers into registers r[0] to r[2],
+assuming that it is running a CPU being told to load some numbers into registers r[0] to r[2],
 while r[0] and r[1] are initialized to have values 00000001 and 00000002 at the beginning:
 ```
 WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
@@ -42,6 +42,24 @@ WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
  500 1 00000002 3c400006  00000005 00000006 xxxxxxxx xxxxxxxx  02 00 00
  600 0 00000003 3c400006  00000005 00000006 00000006 xxxxxxxx  02 00 00
 ```
+How did we tell the CPU to do these instructions?
+We wrote a file called assem.txt, which looks like this:
+```
+li $0 5
+li $1 6
+li $2 6
+```
+We ran assem.txt through compiler.py with the following command:
+```
+python compiler.py assem.txt > test.hex
+```
+Note that the output is directed into test.hex.
+
+text.hex is read by the fetcher.v module.
+The register within cpu.v called "programCounter" points to
+the line number of the next instruction from test.hex to grab.
+
+Now we'll talk about how the CPU uses this stuff.
 
 #CPU
 
@@ -51,11 +69,11 @@ WARNING: fetcher.v:13: $readmemh: Standard inconsistency, following 1364-2005.
  cpu.v is dependent on the following modules:
  fetcher.v, decode.v, and alu.v
 
- fetcher.v is set to grab the next instruction from program memory at every positive clock edge.
- decode.v is set to decode the instruction as soon as fetcher.v is done fetching.
- cpu.v is set to prepare the input data for the alu every negative clock edge (after decode.v is finished)
- alu.v is set to compute inputs and outputs in place as soon as the data (a, b, out) are prepared
- cpu.v is then set to update the registers based on the alu as soon as the alu is finished.
+-fetcher.v is set to grab the next instruction from program memory at every positive clock edge.
+-decode.v is set to decode the instruction as soon as fetcher.v is done fetching.
+-cpu.v is set to prepare the input data for the alu every negative clock edge (after decode.v is finished)
+-alu.v is set to compute inputs and outputs in place as soon as the data (a, b, out) are prepared
+-cpu.v is then set to update the registers based on the alu as soon as the alu is finished.
 
  It runs like clockwork!
 
