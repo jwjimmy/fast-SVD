@@ -38,7 +38,7 @@ module cpu (clk);
 	ALUen = 0;
 	zero = 32'h0;
 
-	$display("\t\t $t clk PC\t instr\t  r[0]\t  r[1]\t   r[2]\t    r[3]\trs rt rd");
+	$display("\t\t $t clk PC\t instr\t  r[0]\t  r[1]\t   r[2]\t    r[3]\thi\tlo");
     $monitorh($time, ,clk, ,programCounter, ,instruction, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,hi, ,lo);
 
 	end

@@ -8,7 +8,8 @@ reader = fileinput.input(filename) # read in the file
 count = 0 # we want to count the number of instructions for later
 
 # new compiler design: we save space by grouping together instructions with similar structure
-is_arithmetic = ["add", "sub", "mul", "div"]
+is_addsub = ["add", "sub"]
+is_muldiv = ["mul", "div"]
 is_shifty = ["sllv", "srlv", "srav"]
 
 for line in reader: # iterate through each line of assembly
@@ -16,11 +17,12 @@ for line in reader: # iterate through each line of assembly
     numwords = len(words)
     instrs = []
 
-    if words[0] != "#" and numwords >= 3: # all instructions must have 3 or more arguments
+    if (words[0] != "#" # comments are marked with a #
+    and numwords >= 3): # all instructions must have 3 or more arguments
 
         #R type instructions
 
-        if words[0] in is_arithmetic:
+        if words[0] in is_addsub:
 
             rsbin = bin(int(words[2][1:]))
             rs = str(rsbin)[2:].zfill(5)
@@ -33,10 +35,19 @@ for line in reader: # iterate through each line of assembly
                 instrbin = "000000" + rs + rt + rd + "00000" + "100000"
             elif words[0] == "sub":
                 instrbin = "000000" + rs + rt + rd + "00000" + "100010"
-            elif words[0] == "mul":
-                instrbin = "000000" + rs + rt + rd + "00000" + "011000"
+
+            instrs.append(instrbin)
+
+        elif words[0] in is_muldiv:
+
+            firstbin = bin(int(words[1][1:]))
+            first = str(rsbin)[2:].zfill(5)
+            secondbin = bin(int(words[2][1:]))
+            second = str(rdbin)[2:].zfill(5)
+            if words[0] == "mul":
+                instrbin = "000000" + first + second + "00000" + "00000" + "011000"
             elif words[0] == "div":
-                instrbin = "000000" + rs + rt + rd + "00000" + "011010"
+                instrbin = "000000" + first + second + "00000" + "00000" + "011010"
 
             instrs.append(instrbin)
 

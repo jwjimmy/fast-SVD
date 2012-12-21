@@ -31,8 +31,14 @@ module alu (clk, out, a, b, shamt, funct, go, hi, lo);
 			6'h12: out = lo; // move from low
 			6'h18: {hi, lo} = a * b; // mul
 			// 6'h19: {hi, lo} = a * b;
-			6'h1A: hi = a % b; // div
-			6'h1A: lo = a / b; // div
+
+
+			6'h1A:// div
+			begin
+			hi = a % b;
+			lo = a / b;
+			end
+
 			// 6'h1B: hi = a % b; // unsigned
 			// 6'h1B: lo = a / b; // unsigned
 			6'h20: out = a + b;
