@@ -7,6 +7,6 @@ mul $2 $0 $1
 div $0 $1 $2
 sw $0 0($0)
 add $1 $2 $3
-sllv $2 $1 5
-srlv $3 $2 1
+#sllv $2 $1 5 NOW WITH COMMENTS
+#srlv $3 $2 1 oh the power
 sllv $0 $1 2

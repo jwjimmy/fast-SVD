@@ -3,19 +3,20 @@ import sys
 import re
 
 filename = str(sys.argv[1]) # accept the name of the assembly file as a command line argument
-reader = fileinput.input(filename)
+reader = fileinput.input(filename) # read in the file
 
 count = 0 # we want to count the number of instructions for later
 
+# new compiler design: we save space by grouping together instructions with similar structure
 is_arithmetic = ["add", "sub", "mul", "div"]
 is_shifty = ["sllv", "srlv", "srav"]
 
-for line in reader: 
-    words = line.split()
+for line in reader: # iterate through each line of assembly
+    words = line.split() # string tokenize with space
     numwords = len(words)
     instrs = []
 
-    if words[0] != "#" and numwords >= 3: #all instructions must have 3 or more arguments
+    if words[0] != "#" and numwords >= 3: # all instructions must have 3 or more arguments
 
         #R type instructions
 
