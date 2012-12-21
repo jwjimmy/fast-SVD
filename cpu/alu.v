@@ -1,4 +1,4 @@
-module alu (clk, out, a, b, shamt, funct, go);
+module alu (clk, out, a, b, shamt, funct, go, hi, lo);
 
 	// crappy ALU mk 1.0
 	// could be thrice as long and twenty times as fast, but it's simply not worth it
@@ -8,7 +8,7 @@ module alu (clk, out, a, b, shamt, funct, go);
 
 	output reg [31:0] out;
 
-	reg [31:0] hi, lo;
+	output reg [31:0] hi, lo;
 
 	input [31:0] a, b;
 

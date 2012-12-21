@@ -15,7 +15,9 @@ module cpu (clk);
 
 	// instantiate registers for ALU inputs
 	output reg [31:0] a, b;
+	wire [31:0] hi, lo;
 	wire [31:0] out;
+	reg [31:0] zero;
 	reg ALUen;
 
 	// connect decoder output to ALU inputs and register indexes
@@ -28,12 +30,13 @@ module cpu (clk);
 
 	decode decode (clk, instruction, opcode, funct, rs, rt, rd, shamt, addr, imm);
 
-	alu mather (clk, out, a, b, shamt, funct, ALUen);
+	alu mather (clk, out, a, b, shamt, funct, ALUen, hi, lo);
 
 	initial begin
 
     programCounter = 0;
 	ALUen = 0;
+	zero = 32'h0;
 
 	$display("\t\t $t clk PC\t instr\t  r[0]\t  r[1]\t   r[2]\t    r[3]\trs rt rd");
     $monitorh($time, ,clk, ,programCounter, ,instruction, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
@@ -44,6 +47,7 @@ module cpu (clk);
 
 	always @ (out) begin
 		registers[rd] = out;
+		$display(hi, ,lo);
 	end
 
 	always @ (negedge clk) begin

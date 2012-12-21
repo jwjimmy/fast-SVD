@@ -103,6 +103,14 @@ CORDIC gets a unitless I1Q31, gives 16b angles with 16b precision.
 
 -----
 
+The following operations are required to calculate the SVD of a 2x2 matrix:
+* 2x2 matrix multiplcation
+* 2x2 matrix transpose
+* Inverse tangent
+
+
+-----
+
 To calculate CORDIC, the following calculations are required:
  
 * three comparisons to determine the appropriate value with which to normalize the input value to between 0 and pi/2.
