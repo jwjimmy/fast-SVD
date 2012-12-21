@@ -39,7 +39,7 @@ module cpu (clk);
 	zero = 32'h0;
 
 	$display("\t\t $t clk PC\t instr\t  r[0]\t  r[1]\t   r[2]\t    r[3]\trs rt rd");
-    $monitorh($time, ,clk, ,programCounter, ,instruction, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,rs, ,rt, ,rd);
+    $monitorh($time, ,clk, ,programCounter, ,instruction, , ,registers[0], ,registers[1], ,registers[2], ,registers[3], , ,hi, ,lo);
 
 	end
 
@@ -47,7 +47,6 @@ module cpu (clk);
 
 	always @ (out) begin
 		registers[rd] = out;
-		$display(hi, ,lo);
 	end
 
 	always @ (negedge clk) begin
