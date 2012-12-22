@@ -8,7 +8,7 @@ reader = fileinput.input(filename) # read in the file
 count = 0 # we want to count the number of instructions for later
 
 # new compiler design: we save space by grouping together instructions with similar structure
-is_addsub = ["add", "sub"]
+is_addsub = ["add", "sub", "and"]
 is_muldiv = ["mul", "div"]
 is_shifty = ["sllv", "srlv", "srav"]
 
@@ -35,6 +35,8 @@ for line in reader: # iterate through each line of assembly
                 instrbin = "000000" + rs + rt + rd + "00000" + "100000"
             elif words[0] == "sub":
                 instrbin = "000000" + rs + rt + rd + "00000" + "100010"
+            elif words[0] == "and":
+                instrbin = "000000" + rs + rt + rd + "00000" + "100100"
 
             instrs.append(instrbin)
 
@@ -69,10 +71,6 @@ for line in reader: # iterate through each line of assembly
                 instrbin = "000000" + rs + "00000" + rd + shamt + "000011"
 
             instrs.append(instrbin)
-
-
-        elif words[0] == "and":
-            funct = bin(int('20',16))
 
         elif words[0] == "or":
             funct = bin(int('20',16))
