@@ -1,0 +1,49 @@
+Multiplication of I16Q16 = I32Q32
+
+For mul
+
+Truncate 
+
+so what happens if overflow?
+
+Addition: Flag hard! No real choice if addition becomes too big.
+
+Multiplication: Flag! Need to calculate if it is problem
+
+----
+
+Actually, the chip has an overflow sensor, so presumably, the chip will flag overflow.
+
+there's a good chance I'll be doing on
+
+
+
+Design choice: I16Q16 representing each entry in the matrix.
+Justification: Enabling fixed point addition/multiplication is a precursor to implementing floating point addition/multiplication. As a proof of concept, I16Q16 is good enough to demonstrate the validity of our algorithms.
+
+Design choice: The ALU chip will throw overflow flags on addition and multiplication overflow.
+Justification: Rotating the matrix and calculating arc tans can cause overflow, which would be disastrous if not identified. The ALU uses logic to write all 1s as a failure case if overflow results (floating point: Not a Number). This allows for easy overflow checking.
+
+4 registers for A
+4 registers for U
+4 registers for V
+2-4 registers for E
+4-6 registers for temp
+
+= 22 registers wanted
+
+$2-$27 are the values we want to use
+
+1+0 = 0 or 1
+0+1 = 0 or 1
+0+0 = 0
+1+1 = 11
+
+we can translate to any negative numbers by adding 1s to the ends of all negative numbers.
+
+.000001 * =.00001 = 0
+
+1*1 = 1 which works with multiplication
+-1*-1 = 1 works
+
+
