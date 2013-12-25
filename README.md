@@ -1,6 +1,8 @@
 # fast-SVD
 
 -----
+We are using Verilog to implement an architecture which optimizes CORDIC-SVD computations, described in this paper:
+http://scholarship.rice.edu/bitstream/handle/1911/20042/Kot1999Aug2Architectu.PDF
 
 The current goal is to have a CPU that computes the SVD of any 2x2 matrix.
 
