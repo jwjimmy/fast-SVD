@@ -138,3 +138,5 @@ This gives a total of eight operations plus fourteen operations per loop iterati
 Trials(see cordic.c and make.sh) indicate that at least ten iterations are required to deliver reasonable results.
 
 This gives a total of 148 operations per calculation of sine and cosine.
+
+<img src="https://fathomless-castle-35327.herokuapp.com/requests/passive">
