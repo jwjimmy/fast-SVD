@@ -139,4 +139,4 @@ Trials(see cordic.c and make.sh) indicate that at least ten iterations are requi
 
 This gives a total of 148 operations per calculation of sine and cosine.
 
-<img src="https://fathomless-castle-35327.herokuapp.com/requests/passive/a316f6b1-5307-489d-a9ec-c2ed02f00ed9">
+<img src="https://fathomless-castle-35327.herokuapp.com/requests/passive/68c011c9-e060-493b-8ba6-874840e2bfce">
